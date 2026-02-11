@@ -1,0 +1,38 @@
+plugins {
+  id 'java'
+  id 'io.quarkus'
+}
+
+repositories {
+  mavenCentral()
+  mavenLocal()
+}
+
+dependencies {
+  implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+  implementation 'io.quarkus:quarkus-smallrye-graphql'
+  implementation 'io.quarkus:quarkus-arc'
+  implementation('com.github.javafaker:javafaker:1.0.2') {
+    exclude group: 'org.yaml', module: 'snakeyaml'
+  }
+  implementation 'org.yaml:snakeyaml:2.5'
+  
+  testImplementation 'io.quarkus:quarkus-junit'
+}
+
+group = 'org.cloudstate'
+version = '1.0'
+
+java {
+  sourceCompatibility = JavaVersion.VERSION_25
+  targetCompatibility = JavaVersion.VERSION_25
+}
+
+compileJava {
+  options.encoding = 'UTF-8'
+  options.compilerArgs << '-parameters'
+}
+
+compileTestJava {
+  options.encoding = 'UTF-8'
+}
